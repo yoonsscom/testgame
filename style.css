@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #87CEEB;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.game-area {
+    width: 400px;
+    height: 600px;
+    background-color: #98FB98;
+    border: 3px solid #228B22;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.player {
+    width: 100px;
+    height: 100px;
+    background-image: url('images/character.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    bottom: 20px;
+    left: 150px;
+    transition: left 0.1s ease;
+}
+
+.poop {
+    width: 15px;
+    height: 15px;
+    background-color: #8B4513;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: absolute;
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+.game-over h2 {
+    margin: 0 0 10px 0;
+    color: #FF6B6B;
+}
+
+.game-over p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.instructions {
+    margin-top: 20px;
+    color: #333;
+    font-size: 16px;
+}
