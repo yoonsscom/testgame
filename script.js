@@ -4,6 +4,9 @@ const player = document.getElementById('player');
 const gameOver = document.getElementById('gameOver');
 const scoreElement = document.getElementById('score');
 const realtimeScoreElement = document.getElementById('realtimeScore');
+const leftBtn = document.getElementById('leftBtn');
+const rightBtn = document.getElementById('rightBtn');
+const restartBtn = document.getElementById('restartBtn');
 
 // 게임 변수들
 let playerPosition = 150; // 플레이어의 x 좌표
@@ -45,14 +48,66 @@ document.addEventListener('keyup', (e) => {
     }
 });
 
+// 터치 버튼 이벤트
+leftBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keys.left = true;
+});
+
+leftBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keys.left = false;
+});
+
+leftBtn.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    keys.left = true;
+});
+
+leftBtn.addEventListener('mouseup', (e) => {
+    e.preventDefault();
+    keys.left = false;
+});
+
+rightBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keys.right = true;
+});
+
+rightBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keys.right = false;
+});
+
+rightBtn.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    keys.right = true;
+});
+
+rightBtn.addEventListener('mouseup', (e) => {
+    e.preventDefault();
+    keys.right = false;
+});
+
+// 재시작 버튼 이벤트
+restartBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    restartGame();
+});
+
 // 플레이어 움직임 함수
 function movePlayer() {
     if (!gameRunning) return;
     
+    // 게임 영역 크기에 맞게 이동 범위 계산
+    const gameAreaWidth = gameArea.offsetWidth;
+    const playerWidth = 100; // 플레이어 크기
+    const maxPosition = gameAreaWidth - playerWidth;
+    
     if (keys.left && playerPosition > 0) {
         playerPosition -= 20;
     }
-    if (keys.right && playerPosition < 300) {
+    if (keys.right && playerPosition < maxPosition) {
         playerPosition += 20;
     }
     
@@ -65,7 +120,15 @@ function createPoop() {
     
     const poop = document.createElement('div');
     poop.className = 'poop';
-    poop.style.left = Math.random() * 370 + 'px'; // 0~370px 사이의 랜덤 위치
+    
+    // 게임 영역의 실제 사용 가능한 공간 계산
+    const gameAreaWidth = gameArea.offsetWidth;
+    const poopWidth = 15; // 똥 크기
+    const borderWidth = 6; // 좌우 border (3px * 2)
+    const usableWidth = gameAreaWidth - borderWidth;
+    const maxPoopPosition = usableWidth - poopWidth;
+    
+    poop.style.left = Math.random() * maxPoopPosition + 'px';
     poop.style.top = '0px';
     
     gameArea.appendChild(poop);
@@ -182,7 +245,12 @@ function gameOverFunc() {
 function restartGame() {
     gameRunning = true;
     gameOver.style.display = 'none';
-    playerPosition = 150;
+    
+    // 게임 영역 크기에 맞게 플레이어 초기 위치 계산
+    const gameAreaWidth = gameArea.offsetWidth;
+    const playerWidth = 100;
+    playerPosition = (gameAreaWidth - playerWidth) / 2; // 중앙 정렬
+    
     player.style.left = playerPosition + 'px';
     poops = [];
     score = 0; // 점수 초기화

@@ -77,8 +77,106 @@ body {
     font-size: 14px;
 }
 
+.restart-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.restart-btn:hover {
+    background-color: #45a049;
+}
+
+.restart-btn:active {
+    background-color: #3d8b40;
+    transform: scale(0.95);
+}
+
+/* 모바일에서 스페이스바 안내 숨기기 */
+@media (max-width: 768px) {
+    .desktop-restart {
+        display: none;
+    }
+    
+    .restart-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+    }
+}
+
 .instructions {
     margin-top: 20px;
     color: #ffffff;
     font-size: 16px;
+}
+
+/* 모바일 컨트롤 */
+.mobile-controls {
+    display: none;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.control-btn {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: all 0.1s ease;
+}
+
+.control-btn:active {
+    background-color: #45a049;
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.left-btn {
+    margin-right: 10px;
+}
+
+.right-btn {
+    margin-left: 10px;
+}
+
+/* 모바일 화면에서만 터치 버튼 표시 */
+@media (max-width: 768px) {
+    .mobile-controls {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .instructions {
+        display: none;
+    }
+    
+    .game-area {
+        width: 90vw;
+        max-width: 400px;
+        height: 60vh;
+        max-height: 600px;
+    }
+    
+    .score-display {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
 }
