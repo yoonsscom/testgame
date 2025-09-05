@@ -3,6 +3,7 @@ const gameArea = document.getElementById('gameArea');
 const player = document.getElementById('player');
 const gameOver = document.getElementById('gameOver');
 const scoreElement = document.getElementById('score');
+const realtimeScoreElement = document.getElementById('realtimeScore');
 
 // 게임 변수들
 let playerPosition = 150; // 플레이어의 x 좌표
@@ -51,13 +52,14 @@ function movePoops() {
     
     poops.forEach((poop, index) => {
         const currentTop = parseInt(poop.style.top);
-        poop.style.top = (currentTop + 3) + 'px'; // 3px씩 아래로 이동
+        poop.style.top = (currentTop + 7) + 'px'; // 3px씩 아래로 이동
         
         // 똥이 화면 밖으로 나가면 제거하고 점수 증가
         if (currentTop > 600) {
             poop.remove();
             poops.splice(index, 1);
             score++; // 똥을 피했으므로 점수 증가
+            realtimeScoreElement.textContent = score; // 실시간 점수 업데이트
         }
         
         // 충돌 감지
@@ -158,6 +160,7 @@ function restartGame() {
     player.style.left = playerPosition + 'px';
     poops = [];
     score = 0; // 점수 초기화
+    realtimeScoreElement.textContent = score; // 실시간 점수 초기화
 }
 
 // 게임 루프
@@ -165,14 +168,14 @@ setInterval(() => {
     if (gameRunning) {
         movePoops();
     }
-}, 50); // 50ms마다 실행
+}, 40); // 50ms마다 실행
 
 // 똥 생성 (1초마다)
 setInterval(() => {
     if (gameRunning) {
         createPoop();
     }
-}, 1000);
+}, 300);
 
 // 게임 시작 시 마스크 이미지 로드
 loadPlayerMask();

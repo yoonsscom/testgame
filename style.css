@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #87CEEB;
+    background-color: #000000;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -13,11 +13,22 @@ body {
     text-align: center;
 }
 
+.score-display {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
 .game-area {
     width: 400px;
     height: 600px;
-    background-color: #98FB98;
-    border: 3px solid #228B22;
+    background-color: #bbbbbb;
+    border: 3px solid #ffffff;
     position: relative;
     overflow: hidden;
     margin: 0 auto;
@@ -68,6 +79,6 @@ body {
 
 .instructions {
     margin-top: 20px;
-    color: #333;
+    color: #ffffff;
     font-size: 16px;
 }
