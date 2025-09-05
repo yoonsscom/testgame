@@ -15,7 +15,13 @@ let score = 0; // 피한 똥 개수
 let playerMaskImage = null;
 let playerMaskLoaded = false;
 
-// 플레이어 움직임
+// 키 입력 상태
+let keys = {
+    left: false,
+    right: false
+};
+
+// 키 입력 감지
 document.addEventListener('keydown', (e) => {
     if (!gameRunning) {
         if (e.code === 'Space') {
@@ -24,14 +30,34 @@ document.addEventListener('keydown', (e) => {
         return;
     }
 
-    if (e.code === 'ArrowLeft' && playerPosition > 0) {
+    if (e.code === 'ArrowLeft') {
+        keys.left = true;
+    } else if (e.code === 'ArrowRight') {
+        keys.right = true;
+    }
+});
+
+document.addEventListener('keyup', (e) => {
+    if (e.code === 'ArrowLeft') {
+        keys.left = false;
+    } else if (e.code === 'ArrowRight') {
+        keys.right = false;
+    }
+});
+
+// 플레이어 움직임 함수
+function movePlayer() {
+    if (!gameRunning) return;
+    
+    if (keys.left && playerPosition > 0) {
         playerPosition -= 20;
-    } else if (e.code === 'ArrowRight' && playerPosition < 300) {
+    }
+    if (keys.right && playerPosition < 300) {
         playerPosition += 20;
     }
     
     player.style.left = playerPosition + 'px';
-});
+}
 
 // 똥 생성 함수
 function createPoop() {
@@ -166,9 +192,10 @@ function restartGame() {
 // 게임 루프
 setInterval(() => {
     if (gameRunning) {
-        movePoops();
+        movePlayer(); // 플레이어 움직임
+        movePoops();  // 똥 움직임
     }
-}, 40); // 50ms마다 실행
+}, 40); // 40ms마다 실행
 
 // 똥 생성 (1초마다)
 setInterval(() => {
