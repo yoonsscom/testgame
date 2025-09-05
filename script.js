@@ -78,7 +78,7 @@ function movePoops() {
     
     poops.forEach((poop, index) => {
         const currentTop = parseInt(poop.style.top);
-        poop.style.top = (currentTop + 7) + 'px'; // 3px씩 아래로 이동
+        poop.style.top = (currentTop + 8) + 'px'; // 3px씩 아래로 이동
         
         // 똥이 화면 밖으로 나가면 제거하고 점수 증가
         if (currentTop > 600) {
@@ -195,14 +195,14 @@ setInterval(() => {
         movePlayer(); // 플레이어 움직임
         movePoops();  // 똥 움직임
     }
-}, 40); // 40ms마다 실행
+}, 45); // 45ms마다 실행
 
 // 똥 생성 (1초마다)
 setInterval(() => {
     if (gameRunning) {
         createPoop();
     }
-}, 300);
+}, 400);
 
 // 게임 시작 시 마스크 이미지 로드
 loadPlayerMask();
